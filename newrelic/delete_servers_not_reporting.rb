@@ -17,7 +17,7 @@
 require 'json'
 require 'curb'
 
-API_KEY = ARGV[0]
+API_KEY ||= ARGV[0]
 DRY_RUN = false
 
 def check_api_key
@@ -46,6 +46,13 @@ end
 def servers_list
    api_call_get("servers.json")
 end
+def applications_list
+  api_call_get("applications.json")
+end
+def plugins_list
+  api_call_get("plugins.json")
+end
+
 def server_reporting?(server)
     puts "checking " + server['server']['name']
     if server['server']['reporting'] == false
@@ -57,6 +64,13 @@ end
 def server_show(id)
     api_call_get("servers/#{id}.json")
 end
+def application_show(id)
+    api_call_get("applications/#{id}.json")
+end
+def plugin_show(id)
+    api_call_get("plugins/#{id}.json")
+end
+
 def server_delete(id)
     api_call_delete("servers/#{id}.json")
 end
